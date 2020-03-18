@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" th:href="@{/stylesheet.css}" type="text/css"/>
+        <title>Create User</title>
+    </head>
+    <body>
+        <div>
+            <h1>
+                Create User
+            </h1>
+        </div>
+        <div th:if="${error}">
+            <div>
+                <p th:text="${error_message}"></p>
+            </div>
+        </div>
+        <div>
+            <form th:action="@{/user}" th:object="${user}" method="POST">
+                <div>
+                    First Name:<br> <input type="text" th:field="*{firstName}" placeholder="First Name"/> <br /><br />
+                </div>
+                <div>
+                    Last Name:<br> <input type="text" th:field="*{lastName}" placeholder="Last Name"/> <br /> <br />
+                </div>
+                <div>
+                    Email:<br> <input type="text" th:field="*{email}" placeholder="Email"/> <br /><br />
+                </div>
+                <div>
+                    Username:<br> <input type="text" th:field="*{username}" placeholder="username"/> <br/><br/>
+                </div>
+                <div>
+                    Password:<br> <input type="password" th:field="*{password}" placeholder="Password"/> <br /><br />
+                </div>
+                <div>
+                    Confirm Password:<br> <input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password"/> <br /><br />
+                </div>
+                <div>
+                    <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>
