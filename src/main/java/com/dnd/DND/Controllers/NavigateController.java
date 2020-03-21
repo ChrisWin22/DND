@@ -67,6 +67,13 @@ public class NavigateController extends DndApplication{
         return "createCharacter";
     }
 
+    @RequestMapping("/signout")
+    public String navSignOut(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.setAttribute("user", null);
+        return "redirect:/";
+    }
+
     @RequestMapping("/ingame")
     public String navInGame(@ModelAttribute("char") Character character, Model model, HttpServletRequest request){
         model.addAttribute("name", character.getName());
