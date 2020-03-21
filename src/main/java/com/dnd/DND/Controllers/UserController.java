@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dnd.DND.Models.Character;
 import com.dnd.DND.Models.User;
+import com.dnd.DND.Models.DTO.CharacterDto;
 import com.dnd.DND.Models.DTO.CharacterFormDto;
 import com.dnd.DND.Models.DTO.SignInDto;
 import com.dnd.DND.Models.DTO.UserDto;
@@ -66,6 +67,18 @@ public class UserController {
         User temp = (User)userRepository.findByUsername(username);
         charRepo.save(newChar);
         temp.addCharacters(newChar);
+        session.setAttribute("user", temp);
+        userRepository.save(temp);
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("/user/deleteCharacter")
+    public String deleteChar(@ModelAttribute("character") CharacterDto characterDto, HttpServletRequest request, Model model){
+        String id = characterDto.getId();
+        HttpSession session = request.getSession();
+        User temp = (User)session.getAttribute("user");
+        temp.deleteCharacterByID(id);
+        charRepo.deleteById(id);
         session.setAttribute("user", temp);
         userRepository.save(temp);
         return "redirect:/dashboard";

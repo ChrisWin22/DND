@@ -29,6 +29,25 @@ public class User {
         characters = new ArrayList<Character>();
     }
 
+    public Character findCharacterById(String id){
+        for(Character c : characters){
+            if(c.getId().compareTo(id) == 0){
+                return c;
+            }
+        }
+        System.out.println("ERROR: Can't find character");
+        return null;
+    }
+
+    public void deleteCharacterByID(String id){
+        Character toRemove = findCharacterById(id);
+        characters.remove(toRemove);
+    }
+
+
+
+    //Getters and Setters
+
     public String getId() {
         return this.id;
     }
@@ -43,16 +62,6 @@ public class User {
 
     public void setCharacters(ArrayList<Character> c){
         characters = c;
-    }
-
-    public Character findCharacterById(String id){
-        for(Character c : characters){
-            if(c.getId().compareTo(id) == 0){
-                return c;
-            }
-        }
-        System.out.println("ERROR: Can't find character");
-        return null;
     }
 
     public void addCharacters(Character character) {

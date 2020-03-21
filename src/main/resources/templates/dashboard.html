@@ -10,6 +10,7 @@
             <h1>
                 Welcome To DND Online
             </h1>
+            <a style="float: right;" href="/signout">Sign Out</a>
         </div>
         <p th:text="${user.username}"></p>
         <div>
@@ -24,6 +25,14 @@
                             <input type="hidden" th:name="id" th:value="${character.id}"/>
                             <div>
                                 <button type="submit" th.text="#{label.form.submit}">Choose</button>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/user/deleteCharacter}" th:object="${characterdto}" method="POST">
+                            <input type="hidden" th:name="id" th:value="${character.id}"/>
+                            <div>
+                                <button type="submit" th.text="#{label.form.submit}">Delete</button>
                             </div>
                         </form>
                     </td>
