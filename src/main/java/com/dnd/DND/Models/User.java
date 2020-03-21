@@ -1,14 +1,23 @@
 package com.dnd.DND.Models;
 
-public class User{
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String username;
-    private String password;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+
+public class User {
+    @Id 
+    public String id;
+    
+    public String firstName;
+    public String lastName;
+    public String email;
+    public String username;
+    public String password;
+    public List<Character> characters;
 
     public User(){
-
+        characters = new ArrayList<Character>();
     }
 
     public User(String fName, String lName, String em, String uName, String pass){
@@ -17,6 +26,37 @@ public class User{
         email = em;
         username = uName;
         password = pass;
+        characters = new ArrayList<Character>();
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Character> getCharacters() {
+        return this.characters;
+    }
+
+    public void setCharacters(ArrayList<Character> c){
+        characters = c;
+    }
+
+    public Character findCharacterById(String id){
+        for(Character c : characters){
+            if(c.getId().compareTo(id) == 0){
+                return c;
+            }
+        }
+        System.out.println("ERROR: Can't find character");
+        return null;
+    }
+
+    public void addCharacters(Character character) {
+        characters.add(character);
     }
 
     public String getFirstName() {

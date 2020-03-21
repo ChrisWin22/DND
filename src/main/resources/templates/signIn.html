@@ -12,8 +12,21 @@
             </h1>
         </div>
         <div>
+            <div th:if="${error}">
+                <p th:text="${error_message}"></p>
+            </div>
             <div>
-                <input type="button" onclick="location.href='/signin';" value="Sign In"/> <input type="button" onclick="location.href='/createuser';" value="Create User"/>
+                <form th:action="@{/user/signin}" th:object="${userdto}" method="POST">
+                    <div>
+                        <input type="text" th:field="*{username}" placeholder="Username"/> <br /><br />
+                    </div>
+                    <div>
+                        <input type="password" th:field="*{password}" placeholder="Password"/> <br /> <br />
+                    </div>
+                    <div>
+                        <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
+                    </div>
+                </form>
             </div>
         </div>
 

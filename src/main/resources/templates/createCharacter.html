@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" th:href="@{/stylesheet.css}" type="text/css"/>
+        <title>Character Creation</title>
+    </head>
+    <body>
+        <div>
+            <h1>
+                Welcome To DND Online
+            </h1>
+        </div>
+        <div>
+            <form th:action="@{/user/createCharacter}" th:object="${characterformdto}" method="POST">
+                <input type="text" th:field="*{name}" placeholder="Name"/> <br /><br />
+                <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
+            </form>
+        </div>
+
+    </body>
+</html>
