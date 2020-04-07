@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.Character;
 import com.dnd.DND.Models.User;
 import com.dnd.DND.Models.DTO.CharacterDto;
@@ -16,6 +17,7 @@ import com.dnd.DND.Services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,6 +44,9 @@ public class UserController {
         User register = new User();
         if (!result.hasErrors()){
             register=createNewUserAccount(userdto,result);
+            if (register==null){
+                return "redirect:/createuser?error=duplicateusername";
+            }
         }
         return "redirect:/dashboard";
     }
@@ -71,7 +76,12 @@ public class UserController {
 
     private User createNewUserAccount(UserDto user, BindingResult result){
         User register=null;
-        register= userService.registerNewUserAccount(user);
+        try {
+            register = userService.registerNewUserAccount(user);
+        }catch(UsernameExistsException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
         return register;
     }
 }

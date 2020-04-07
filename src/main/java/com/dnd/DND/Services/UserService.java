@@ -1,5 +1,6 @@
 package com.dnd.DND.Services;
 
+import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.DTO.UserDto;
 import com.dnd.DND.Models.User;
 import com.dnd.DND.Repositories.UserRepository;
@@ -18,7 +19,10 @@ public class UserService implements IUserService {
 
     @Transactional
     @Override
-    public User registerNewUserAccount(UserDto userdto){
+    public User registerNewUserAccount(UserDto userdto) throws UsernameExistsException {
+        if (usernameExists(userdto.getUsername())){
+            throw new UsernameExistsException("there was an account with this username: " + userdto.getUsername());
+        }
         User register=new User();
         register.setFirstName(userdto.getFirstName());
         register.setLastName(userdto.getLastName());
@@ -28,5 +32,13 @@ public class UserService implements IUserService {
         register.addRole("user");
         return userRepository.save(register);
 
+    }
+    private boolean usernameExists(String username){
+        User user=userRepository.findByUsername(username);
+        if (user==null){
+            return false;
+        } else {
+            return true;
+        }
     }
 }
