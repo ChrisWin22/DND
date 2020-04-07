@@ -17,7 +17,7 @@
             </div>
         </div>
         <div>
-            <form th:action="@{/user}" th:object="${user}" method="POST">
+            <form th:action="@{/createuser}" th:object="${user}" method="POST">
                 <div>
                     <input type="text" th:field="*{firstName}" placeholder="First Name"/> <br /><br />
                 </div>
