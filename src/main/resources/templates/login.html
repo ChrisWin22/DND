@@ -16,15 +16,15 @@
                 <p th:text="${error_message}"></p>
             </div>
             <div>
-                <form th:action="@{/user/signin}" th:object="${userdto}" method="POST">
+                <form action="login" method="POST">
                     <div>
-                        <input type="text" th:field="*{username}" placeholder="Username"/> <br /><br />
+                        <input type="text" placeholder="Username" name="username"/> <br /><br />
                     </div>
                     <div>
-                        <input type="password" th:field="*{password}" placeholder="Password"/> <br /> <br />
+                        <input type="password" placeholder="Password" name="password"/> <br /> <br />
                     </div>
                     <div>
-                        <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
+                        <button type="submit">Submit</button> <input type="reset" value="Reset" /> <br />
                     </div>
                 </form>
             </div>

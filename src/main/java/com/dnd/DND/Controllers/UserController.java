@@ -2,24 +2,36 @@ package com.dnd.DND.Controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
+import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.Character;
 import com.dnd.DND.Models.User;
 import com.dnd.DND.Models.DTO.CharacterDto;
 import com.dnd.DND.Models.DTO.CharacterFormDto;
-import com.dnd.DND.Models.DTO.SignInDto;
 import com.dnd.DND.Models.DTO.UserDto;
 import com.dnd.DND.Repositories.CharacterRepository;
 import com.dnd.DND.Repositories.UserRepository;
 
+import com.dnd.DND.Services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class UserController {
+
+    @Autowired
+    private IUserService userService;
 
     @Autowired
     UserRepository userRepository;
@@ -27,58 +39,49 @@ public class UserController {
     @Autowired
     CharacterRepository charRepo;
 
-    @PostMapping("/user")
-    public String addUser(@ModelAttribute("user") UserDto userdto, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        if (userdto.getPassword().compareTo(userdto.getConfirmPassword()) != 0) {
-            return "redirect:/createuser-wrong-match";
-        }
+    @PostMapping("/createuser")
+    public String addUser(@ModelAttribute("user") @Valid UserDto userdto, BindingResult result, Model model, HttpServletRequest request) {
         User register = new User();
-        register.setFirstName(userdto.getFirstName());
-        register.setLastName(userdto.getLastName());
-        register.setEmail(userdto.getEmail());
-        register.setUsername(userdto.getUsername());
-        register.setPassword(userdto.getPassword());
-        userRepository.save(register);
-        session.setAttribute("user", register);
-        return "redirect:/dashboard";
-    }
-
-    @PostMapping("/user/signin")
-    public String signIn(@ModelAttribute("userdto") SignInDto SignInDto, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User temp = userRepository.findByUsername(SignInDto.getUsername());
-        if (temp.getPassword().compareTo(SignInDto.getPassword()) != 0) {
-            return "redirect:/failed_signin";
+        if (!result.hasErrors()){
+            register=createNewUserAccount(userdto,result);
+            if (register==null){
+                return "redirect:/createuser?error=duplicateusername";
+            }
         }
-        session.setAttribute("user", temp);
         return "redirect:/dashboard";
     }
 
     @PostMapping("/user/createCharacter")
-    public String createNew(@ModelAttribute("character") CharacterFormDto characterFormDto, HttpServletRequest request, Model model) {
+    public String createNew(@ModelAttribute("character") CharacterFormDto characterFormDto, Authentication authentication, Model model) {
         Character newChar = new Character();
         newChar.setName(characterFormDto.getName());
-        HttpSession session = request.getSession();
-        String username = ((User) session.getAttribute("user")).getUsername();
-        User temp = (User)userRepository.findByUsername(username);
+        UserDetails userDetails=(UserDetails) authentication.getPrincipal();
+        User temp = userRepository.findByUsername(userDetails.getUsername());
         charRepo.save(newChar);
         temp.addCharacters(newChar);
-        session.setAttribute("user", temp);
         userRepository.save(temp);
         return "redirect:/dashboard";
     }
 
     @PostMapping("/user/deleteCharacter")
-    public String deleteChar(@ModelAttribute("character") CharacterDto characterDto, HttpServletRequest request, Model model){
+    public String deleteChar(@ModelAttribute("character") CharacterDto characterDto, Authentication authentication, Model model){
         String id = characterDto.getId();
-        HttpSession session = request.getSession();
-        User temp = (User)session.getAttribute("user");
+        UserDetails userDetails=(UserDetails) authentication.getPrincipal();
+        User temp = userRepository.findByUsername(userDetails.getUsername());
         temp.deleteCharacterByID(id);
         charRepo.deleteById(id);
-        session.setAttribute("user", temp);
         userRepository.save(temp);
         return "redirect:/dashboard";
     }
 
+    private User createNewUserAccount(UserDto user, BindingResult result){
+        User register=null;
+        try {
+            register = userService.registerNewUserAccount(user);
+        }catch(UsernameExistsException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return register;
+    }
 }

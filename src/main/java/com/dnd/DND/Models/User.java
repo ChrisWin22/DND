@@ -15,9 +15,24 @@ public class User {
     public String username;
     public String password;
     public List<Character> characters;
+    private List<String> roles;
+
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(String role){
+        roles.add(role);
+    }
 
     public User(){
-        characters = new ArrayList<Character>();
+        characters = new ArrayList<>();
+        roles = new ArrayList<>();
     }
 
     public User(String fName, String lName, String em, String uName, String pass){

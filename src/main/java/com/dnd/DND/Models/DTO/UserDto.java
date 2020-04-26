@@ -1,10 +1,30 @@
 package com.dnd.DND.Models.DTO;
 
+import com.dnd.DND.Security.Validators.PasswordMatches;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@PasswordMatches
 public class UserDto{
+    @NotNull
+    @NotEmpty
     private String firstName;
+
+    @NotNull
+    @NotEmpty
     private String lastName;
+
+    @NotEmpty
+    @NotNull
     private String email;
+
+    @NotEmpty
+    @NotNull
     private String username;
+
+    @NotEmpty
+    @NotNull
     private String password;
     private String confirmPassword;
 
