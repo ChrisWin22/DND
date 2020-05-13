@@ -1,9 +1,9 @@
 package com.dnd.DND.Controllers;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.dnd.DND.Exceptions.EmailExistsException;
 import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.Character;
 import com.dnd.DND.Models.User;
@@ -17,38 +17,30 @@ import com.dnd.DND.Services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
+@SuppressWarnings("unused")
 @Controller
+@Validated
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    CharacterRepository charRepo;
+    private CharacterRepository charRepo;
 
     @PostMapping("/createuser")
     public String addUser(@ModelAttribute("user") @Valid UserDto userdto, BindingResult result, Model model, HttpServletRequest request) {
-        User register = new User();
-        if (!result.hasErrors()){
-            register=createNewUserAccount(userdto,result);
-            if (register==null){
-                return "redirect:/createuser?error=duplicateusername";
-            }
-        }
-        return "redirect:/dashboard";
+        return createNewUserAccount(userdto,result);
     }
 
     @PostMapping("/user/createCharacter")
@@ -74,14 +66,15 @@ public class UserController {
         return "redirect:/dashboard";
     }
 
-    private User createNewUserAccount(UserDto user, BindingResult result){
-        User register=null;
+    private String createNewUserAccount(UserDto user, BindingResult result) {
         try {
-            register = userService.registerNewUserAccount(user);
-        }catch(UsernameExistsException e){
-            System.out.println(e.getMessage());
-            return null;
+            User register = userService.registerNewUserAccount(user);
+            userRepository.save(register);
+        } catch (EmailExistsException e) {
+            return "redirect:/createuser?error=duplicateemail";
+        } catch (UsernameExistsException e) {
+            return "redirect:/createuser?error=duplicateusername";
         }
-        return register;
+        return "redirect:/dashboard";
     }
 }

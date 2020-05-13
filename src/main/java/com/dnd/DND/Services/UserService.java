@@ -1,5 +1,6 @@
 package com.dnd.DND.Services;
 
+import com.dnd.DND.Exceptions.EmailExistsException;
 import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.DTO.UserDto;
 import com.dnd.DND.Models.User;
@@ -19,9 +20,12 @@ public class UserService implements IUserService {
 
     @Transactional
     @Override
-    public User registerNewUserAccount(UserDto userdto) throws UsernameExistsException {
+    public User registerNewUserAccount(UserDto userdto) throws UsernameExistsException,EmailExistsException {
         if (usernameExists(userdto.getUsername())){
             throw new UsernameExistsException("there was an account with this username: " + userdto.getUsername());
+        }
+        if (emailExists(userdto.getEmail())){
+            throw new EmailExistsException("There was an account with the email: " + userdto.getEmail());
         }
         User register=new User();
         register.setFirstName(userdto.getFirstName());
@@ -35,6 +39,14 @@ public class UserService implements IUserService {
     }
     private boolean usernameExists(String username){
         User user=userRepository.findByUsername(username);
+        if (user==null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    private boolean emailExists(String email){
+        User user=userRepository.findByEmail(email);
         if (user==null){
             return false;
         } else {

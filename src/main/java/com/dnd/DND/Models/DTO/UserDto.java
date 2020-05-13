@@ -2,29 +2,37 @@ package com.dnd.DND.Models.DTO;
 
 import com.dnd.DND.Security.Validators.PasswordMatches;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @PasswordMatches
 public class UserDto{
     @NotNull
     @NotEmpty
+    @Size(min=3,message="{Size.userDto.firstName}")
+    @Pattern(regexp = "[a-zA-Z0-9.-_]*",message = "{Pattern.userDto.firstName}")
     private String firstName;
 
     @NotNull
     @NotEmpty
+    @Size(min=3,message="{Size.userDto.lastName}")
+    @Pattern(regexp = "[a-zA-Z0-9.-_]*", message = "{Pattern.userDto.lastName}")
     private String lastName;
 
     @NotEmpty
     @NotNull
+    @Email
     private String email;
 
     @NotEmpty
     @NotNull
+    @Size(min=3,message = "{Size.userDto.username}")
+    @Pattern(regexp = "[a-zA-Z0-9.-_]*", message = "{Pattern.userDto.username}")
     private String username;
 
     @NotEmpty
     @NotNull
+    @Size(min=4,message="{Size.userDto.password}")
+    @Pattern(regexp = "[a-zA-Z0-9!@#$%^&*}{;:/?.><,|+=]*",message = "{Pattern.userDto.password}")
     private String password;
     private String confirmPassword;
 
