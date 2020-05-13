@@ -1,9 +1,10 @@
 package com.dnd.DND.Controllers;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
+import com.dnd.DND.Exceptions.EmailExistsException;
 import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.Character;
 import com.dnd.DND.Models.User;
@@ -15,40 +16,42 @@ import com.dnd.DND.Repositories.UserRepository;
 
 import com.dnd.DND.Services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+@SuppressWarnings("unused")
 @Controller
+@Validated
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    CharacterRepository charRepo;
+    private CharacterRepository charRepo;
 
     @PostMapping("/createuser")
     public String addUser(@ModelAttribute("user") @Valid UserDto userdto, BindingResult result, Model model, HttpServletRequest request) {
-        User register = new User();
-        if (!result.hasErrors()){
-            register=createNewUserAccount(userdto,result);
-            if (register==null){
-                return "redirect:/createuser?error=duplicateusername";
-            }
-        }
-        return "redirect:/dashboard";
+        return createNewUserAccount(userdto,result);
     }
 
     @PostMapping("/user/createCharacter")
@@ -74,14 +77,27 @@ public class UserController {
         return "redirect:/dashboard";
     }
 
-    private User createNewUserAccount(UserDto user, BindingResult result){
-        User register=null;
+    private String createNewUserAccount(UserDto user, BindingResult result) {
         try {
-            register = userService.registerNewUserAccount(user);
-        }catch(UsernameExistsException e){
-            System.out.println(e.getMessage());
-            return null;
+            User register = userService.registerNewUserAccount(user);
+            userRepository.save(register);
+        } catch (EmailExistsException e) {
+            return "redirect:/createuser?error=duplicateemail";
+        } catch (UsernameExistsException e) {
+            return "redirect:/createuser?error=duplicateusername";
         }
-        return register;
+        return "redirect:/dashboard";
     }
+
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler({ConstraintViolationException.class})
+//    public Map<String,String> handleValidationExceptions(
+//            ConstraintViolationException ex) {
+//        Map<String,String> err=new HashMap<>();
+//        ex.getConstraintViolations().forEach(e -> {
+//            err.put(e.getInvalidValue().toString(),e.getMessage());
+//        });
+//        System.out.println("in exception handler");
+//        return err;
+//    }
 }
