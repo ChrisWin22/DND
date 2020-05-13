@@ -30,10 +30,10 @@ public class NavigateController extends DndApplication{
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/login")
-    public String navSignIn(Model model){
-        return "login";
-    }
+    // @GetMapping("/login")
+    // public String navSignIn(Model model){
+    //     return "login";
+    // }
 
     @GetMapping("/createuser")
     public String navCreateUser(Model model){
