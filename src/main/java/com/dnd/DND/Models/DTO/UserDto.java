@@ -25,13 +25,13 @@ public class UserDto{
 
     @NotEmpty
     @NotNull
-    @Size(min=3,message = "{Size.userDto.username}")
+    @Size(min=1,message = "{Size.userDto.username}")
     @Pattern(regexp = "[a-zA-Z0-9.-_]*", message = "{Pattern.userDto.username}")
     private String username;
 
     @NotEmpty
     @NotNull
-    @Size(min=4,message="{Size.userDto.password}")
+    @Size(min=1,message="{Size.userDto.password}")
     @Pattern(regexp = "[a-zA-Z0-9!@#$%^&*}{;:/?.><,|+=]*",message = "{Pattern.userDto.password}")
     private String password;
     private String confirmPassword;
