@@ -1,9 +1,9 @@
 var canvas = document.getElementById("canvasMap");
 var w3rcontext = canvas.getContext('2d');
 // Box width
-var bw = 400;
+var bw = 1200;
 // Box height
-var bh = 400;
+var bh = 1600;
 // Padding
 var p = 10;
 
