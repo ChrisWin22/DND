@@ -4,13 +4,15 @@ $(document).ready(function(){
     var canvas = document.getElementById("canvasMap");
     var w3rcontext = canvas.getContext('2d');
     // Box width
-    var bw = 1200;
+    var bw;
     // Box height
-    var bh = 1600;
+    var bh;
     // Padding
     var p = 10;
     
     function drawBoard(){
+        bw = canvas.clientWidth - 40;
+        bh = canvas.clientHeight - 40;
         for (var x = 0; x <= bw; x += 40) {
             w3rcontext.moveTo(0.5 + x + p, p);
             w3rcontext.lineTo(0.5 + x + p, bh + p);
@@ -38,6 +40,8 @@ $(document).ready(function(){
         var y = e.offsetY;
         console.log(x + ", " + y);
     });
+
+    $(document).onresize(drawBoard())
 });
 
 
