@@ -24,7 +24,7 @@ function updateSubRace(){
             if(sub.hasAttribute("disabled")){
                 sub.removeAttribute("disabled");
             }
-            var subs = ["High Elf", "Wood Elf", "Dark Elf"];
+            var subs = ["High Elf", "Wood Elf", "Dark Elf/Drow"];
             addItemsToSelect("subrace", subs);
             break;
         case "Halfling":
