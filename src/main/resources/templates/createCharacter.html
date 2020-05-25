@@ -14,6 +14,20 @@
         <div>
             <form th:action="@{/user/createCharacter}" th:object="${characterformdto}" method="POST">
                 <input type="text" th:field="*{name}" placeholder="Name"/> <br /><br />
+
+                <label for="race">Race:</label>
+                <select th:field="*{race}" name="race" id="race">
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Halfling">Halfling</option>
+                    <option value="Human">Human</option>
+                    <option value="Dragonborn">Dragonborn</option>
+                    <option value="Gnome">Gnome</option>
+                    <option value="Halfelf">Half-Elf</option>
+                    <option value="Halforc">Half-Orc</option>
+                    <option value="Tiefling">Tiefling</option>
+                </select>
+
                 <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
             </form>
         </div>

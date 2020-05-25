@@ -47,6 +47,7 @@ public class UserController {
     public String createNew(@ModelAttribute("character") CharacterFormDto characterFormDto, Authentication authentication, Model model) {
         Character newChar = new Character();
         newChar.setName(characterFormDto.getName());
+        newChar.setRace(characterFormDto.getRace());
         UserDetails userDetails=(UserDetails) authentication.getPrincipal();
         User temp = userRepository.findByUsername(userDetails.getUsername());
         charRepo.save(newChar);
