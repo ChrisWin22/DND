@@ -69,6 +69,21 @@
                     <option value="Neutral Evil">Neutral Evil</option>
                     <option value="Chaotic Evil">Chaotic Evil</option>
                 </select><br /><br />
+                <h3>Ability Scores</h3>
+                <h4>Select Each Option Only Once</h4>
+                <button id="generateAbilityScores" type="button">Generate</button>
+                <label for="str">Strength</label>
+                <select th:field="*{str}" name="str" id="str" disabled></select>
+                <label for="dex">Dexterity</label>
+                <select th:field="*{dex}" name="dex" id="dex" disabled></select>
+                <label for="consti">Constitution</label>
+                <select th:field="*{consti}" name="consti" id="consti" disabled></select>
+                <label for="intell">Intelligence</label>
+                <select th:field="*{intell}" name="intell" id="intell" disabled></select>
+                <label for="wis">Wisdom</label>
+                <select th:field="*{wis}" name="wis" id="wis" disabled></select>
+                <label for="charisma">Charisma</label>
+                <select th:field="*{charisma}" name="charisma" id="charisma" disabled></select><br /><br />
 
 
                 <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />

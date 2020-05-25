@@ -1,5 +1,6 @@
 $(document).ready(function(){
     document.getElementById("race").addEventListener("change", updateSubRace);
+    document.getElementById("generateAbilityScores").addEventListener("click", generateScores);
 });
 
 function updateSubRace(){
@@ -61,4 +62,44 @@ function addItemsToSelect(id, arr){
     for(i in arr){
         select.options[select.options.length] = new Option(arr[i], arr[i]);
     }
+}
+
+
+function generateScores(){
+    document.getElementById("generateAbilityScores").setAttribute("disabled", "disabled");
+    arr = [];
+    for(let i = 0; i < 6; ++i){
+        arr.push(sumOfTopThreeRolls());
+    }
+
+    //activate all dropdowns
+    document.getElementById("str").removeAttribute("disabled");
+    document.getElementById("dex").removeAttribute("disabled");
+    document.getElementById("consti").removeAttribute("disabled");
+    document.getElementById("intell").removeAttribute("disabled");
+    document.getElementById("wis").removeAttribute("disabled");
+    document.getElementById("charisma").removeAttribute("disabled");
+
+    addItemsToSelect("str", arr);
+    addItemsToSelect("dex", arr);
+    addItemsToSelect("consti", arr);
+    addItemsToSelect("intell", arr);
+    addItemsToSelect("wis", arr);
+    addItemsToSelect("charisma", arr);
+
+
+}
+
+function sumOfTopThreeRolls(){
+    var sum = 0;
+    var min = 7;
+
+    for(let i = 0; i < 4; ++i){
+        let temp = Math.floor((Math.random() * 6) + 1);
+        sum += temp;
+        if(temp < min){
+            min = temp;
+        }
+    }
+    return sum - min;
 }
