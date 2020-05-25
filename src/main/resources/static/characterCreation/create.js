@@ -13,12 +13,7 @@ function updateSubRace(){
             sub.setAttribute("disabled", "disabled");
             break;
         case "Dwarf":
-            if(sub.hasAttribute("disabled")){
-                sub.removeAttribute("disabled");
-            }
-
             var subs = ["Hill Dwarf", "Mountain Dwarf"];
-
             addItemsToSelect("subrace", subs);
             break;
         default:
@@ -30,6 +25,10 @@ function updateSubRace(){
 }
 
 function addItemsToSelect(id, arr){
+    if(sub.hasAttribute("disabled")){
+        sub.removeAttribute("disabled");
+    }
+
     $("#" + id).empty();
     var select = document.getElementById(id);
     for(i in arr){
