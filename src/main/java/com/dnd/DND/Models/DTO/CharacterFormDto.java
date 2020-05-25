@@ -20,7 +20,7 @@ public class CharacterFormDto{
     private int intell;
     private int wis;
     private int charisma;
-    private int sanity;
+    // private int sanity;
 
     private int acrobatics;
     private int animal;
@@ -196,13 +196,13 @@ public class CharacterFormDto{
         this.charisma = charisma;
     }
 
-    public int getSanity() {
-        return this.sanity;
-    }
+    // public int getSanity() {
+    //     return this.sanity;
+    // }
 
-    public void setSanity(int sanity) {
-        this.sanity = sanity;
-    }
+    // public void setSanity(int sanity) {
+    //     this.sanity = sanity;
+    // }
 
     public int getAcrobatics() {
         return this.acrobatics;
