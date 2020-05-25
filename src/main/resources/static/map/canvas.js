@@ -14,13 +14,13 @@ $(document).ready(function(){
         bw = canvas.clientWidth - 40;
         bh = canvas.clientHeight - 40;
         for (var x = 0; x <= bw; x += 40) {
-            w3rcontext.moveTo(0.5 + x + p, p);
-            w3rcontext.lineTo(0.5 + x + p, bh + p);
+            w3rcontext.moveTo(x + p, p);
+            w3rcontext.lineTo(x + p, bh + p);
         }
     
         for (var x = 0; x <= bh; x += 40) {
-            w3rcontext.moveTo(p, 0.5 + x + p);
-            w3rcontext.lineTo(bw + p, 0.5 + x + p);
+            w3rcontext.moveTo(p, x + p);
+            w3rcontext.lineTo(bw + p, x + p);
         }
         w3rcontext.strokeStyle = "black";
         w3rcontext.stroke();
@@ -36,14 +36,13 @@ $(document).ready(function(){
     });
 
     $("#canvasMap").click(function(e){
-        var x = e.offsetX;
-        var y = e.offsetY;
+        var x = e.offsetX - p;
+        var y = e.offsetY - p;
         var squareHorizontal = Math.floor(x / 40);
         var squareVertical = Math.floor(y / 40);
         w3rcontext.fillRect(p + (squareHorizontal * 40), p + (squareVertical * 40), 40, 40);
     });
 
-    $(document).onresize(drawBoard())
 });
 
 
