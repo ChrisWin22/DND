@@ -17,15 +17,15 @@
 
                 <label for="race">Race:</label>
                 <select th:field="*{race}" name="race" id="race">
-                    <option value="None">None</option>
+                    <option value=null>--Select An Option--</option>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Elf">Elf</option>
                     <option value="Halfling">Halfling</option>
                     <option value="Human">Human</option>
                     <option value="Dragonborn">Dragonborn</option>
                     <option value="Gnome">Gnome</option>
-                    <option value="Halfelf">Half-Elf</option>
-                    <option value="Halforc">Half-Orc</option>
+                    <option value="Half-Elf">Half-Elf</option>
+                    <option value="Half-Orc">Half-Orc</option>
                     <option value="Tiefling">Tiefling</option>
                 </select> <br /><br />
                 <label for="subrace">Sub-Race:</label>
@@ -34,7 +34,7 @@
                 <input th:field="*{age}" type="number" placeholder="Age"/> <br /><br />
                 <label for="class">Class:</label>
                 <select th:field="*{class}" name="class" id="class">
-                    <option value="None">None</option>
+                    <option value=null>--Select An Option--</option>
                     <option value="Barbarian">Barbarian</option>
                     <option value="Bard">Bard</option>
                     <option value="Cleric">Cleric</option>
@@ -50,6 +50,7 @@
                 </select><br /><br />
                 <label for="sex">Sex:</label>
                 <select th:field="*{sex}" name="sex" id="sex">
+                    <option value=null>--Select An Option--</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
                 </select><br /><br />
@@ -57,6 +58,7 @@
                 <input th:field="*{height}" type="number" placeholder="Height (5.9 = 5'9&quot;)"/><br /><br />
                 <label for="alignment">Alignment:</label>
                 <select th:field="*{alignment}" name="alignment" id="alignment">
+                    <option value=null>--Select An Option--</option>
                     <option value="Lawful Good">Lawful Good</option>
                     <option value="Neutral Good">Neutral Good</option>
                     <option value="Chaotic Good">Chaotic Good</option>
