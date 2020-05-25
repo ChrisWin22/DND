@@ -41,7 +41,6 @@ $(document).ready(function(){
         var squareHorizontal = Math.floor(x / 40);
         var squareVertical = Math.floor(y / 40);
         w3rcontext.fillRect(p + (squareHorizontal * 40), p + (squareVertical * 40), 40, 40);
-        console.log("click");
     });
 
 });
