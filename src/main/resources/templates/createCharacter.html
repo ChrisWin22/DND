@@ -17,6 +17,7 @@
 
                 <label for="race">Race:</label>
                 <select th:field="*{race}" name="race" id="race">
+                    <option value="None">None</option>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Elf">Elf</option>
                     <option value="Halfling">Halfling</option>
@@ -27,10 +28,13 @@
                     <option value="Halforc">Half-Orc</option>
                     <option value="Tiefling">Tiefling</option>
                 </select> <br /><br />
+                <label for="subrace">Sub-Race:</label>
+                <select th:field="*{subrace}" name="subrace" id="subrace" disabled></select><br /><br />
                 <textarea th:field="*{background}" placeholder="Background"></textarea> <br /><br />
                 <input th:field="*{age}" type="number" placeholder="Age"/> <br /><br />
                 <label for="class">Class:</label>
                 <select th:field="*{class}" name="class" id="class">
+                    <option value="None">None</option>
                     <option value="Barbarian">Barbarian</option>
                     <option value="Bard">Bard</option>
                     <option value="Cleric">Cleric</option>
@@ -63,11 +67,13 @@
                     <option value="Neutral Evil">Neutral Evil</option>
                     <option value="Chaotic Evil">Chaotic Evil</option>
                 </select><br /><br />
-                
+
 
                 <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
             </form>
         </div>
 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript" th:src="@{/characterCreation/create.js}"></script>
     </body>
 </html>
