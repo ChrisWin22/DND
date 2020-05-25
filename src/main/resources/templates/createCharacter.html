@@ -43,6 +43,25 @@
                     <option value="Sorcerer">Sorcerer</option>
                     <option value="Warlock">Warlock</option>
                     <option value="Wizard">Wizard</option>
+                </select><br /><br />
+                <label for="sex">Sex:</label>
+                <select th:field="*{sex}" name="sex" id="sex">
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select><br /><br />
+                <input th:field="*{weight}" type="number" placeholder="Weight"/><br /><br />
+                <input th:field="*{height}" type="number" placeholder="Height (5.9 = 5'9&quot;)"/><br /><br />
+                <label for="alignment">Alignment:</label>
+                <select th:field="*{alignment}" name="alignment" id="alignment">
+                    <option value="Lawful Good">Lawful Good</option>
+                    <option value="Neutral Good">Neutral Good</option>
+                    <option value="Chaotic Good">Chaotic Good</option>
+                    <option value="Lawful Neutral">Lawful Neutral</option>
+                    <option value="Neutral">Neutral</option>
+                    <option value="Chaotic Neutral">Chaotic Neutral</option>
+                    <option value="Lawful Evil">Lawful Evil</option>
+                    <option value="Neutral Evil">Neutral Evil</option>
+                    <option value="Chaotic Evil">Chaotic Evil</option>
                 </select>
 
                 <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
