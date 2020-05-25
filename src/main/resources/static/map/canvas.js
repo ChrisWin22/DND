@@ -38,7 +38,9 @@ $(document).ready(function(){
     $("#canvasMap").click(function(e){
         var x = e.offsetX;
         var y = e.offsetY;
-        console.log(x + ", " + y);
+        var squareHorizontal = Math.floor(x / 40);
+        var squareVertical = Math.floor(y / 40);
+        w3rcontext.fillRect(p + (squareHorizontal * 40), p + (squareVertical * 40), 40, 40);
     });
 
     $(document).onresize(drawBoard())
