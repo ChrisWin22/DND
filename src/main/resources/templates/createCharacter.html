@@ -26,7 +26,9 @@
                     <option value="Halfelf">Half-Elf</option>
                     <option value="Halforc">Half-Orc</option>
                     <option value="Tiefling">Tiefling</option>
-                </select>
+                </select> <br /><br />
+                <textarea th:field="*{background}" placeholder="Background"></textarea> <br /><br />
+                <input th:field="*{age}" type="number" placeholder="Age"/> <br /><br />
 
                 <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
             </form>
