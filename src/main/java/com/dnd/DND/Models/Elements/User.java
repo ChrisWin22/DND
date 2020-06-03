@@ -1,4 +1,4 @@
-package com.dnd.DND.Models;
+package com.dnd.DND.Models.Elements;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.dnd.DND.Repositories;
 
-import com.dnd.DND.Models.Character;
+import com.dnd.DND.Models.Elements.Character;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

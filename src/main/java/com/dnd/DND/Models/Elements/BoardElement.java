@@ -1,4 +1,4 @@
-package com.dnd.DND.Models;
+package com.dnd.DND.Models.Elements;
 
 public class BoardElement{
     

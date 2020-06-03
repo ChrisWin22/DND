@@ -5,8 +5,8 @@ import javax.validation.Valid;
 
 import com.dnd.DND.Exceptions.EmailExistsException;
 import com.dnd.DND.Exceptions.UsernameExistsException;
-import com.dnd.DND.Models.Character;
-import com.dnd.DND.Models.User;
+import com.dnd.DND.Models.Elements.Character;
+import com.dnd.DND.Models.Elements.User;
 import com.dnd.DND.Models.DTO.CharacterDto;
 import com.dnd.DND.Models.DTO.CharacterFormDto;
 import com.dnd.DND.Models.DTO.UserDto;

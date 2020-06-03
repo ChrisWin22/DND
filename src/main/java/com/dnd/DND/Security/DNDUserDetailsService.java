@@ -1,6 +1,6 @@
 package com.dnd.DND.Security;
 
-import com.dnd.DND.Models.User;
+import com.dnd.DND.Models.Elements.User;
 import com.dnd.DND.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

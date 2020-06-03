@@ -1,6 +1,6 @@
 package com.dnd.DND.Repositories;
 
-import com.dnd.DND.Models.User;
+import com.dnd.DND.Models.Elements.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserRepository extends MongoRepository<User, String> {

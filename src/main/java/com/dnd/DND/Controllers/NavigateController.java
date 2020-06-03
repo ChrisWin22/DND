@@ -3,9 +3,9 @@ package com.dnd.DND.Controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.dnd.DND.Models.User;
+import com.dnd.DND.Models.Elements.User;
 import com.dnd.DND.DndApplication;
-import com.dnd.DND.Models.Character;
+import com.dnd.DND.Models.Elements.Character;
 import com.dnd.DND.Models.DTO.CharacterDto;
 import com.dnd.DND.Models.DTO.CharacterFormDto;
 import com.dnd.DND.Models.DTO.UserDto;

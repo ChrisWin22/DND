@@ -3,7 +3,7 @@ package com.dnd.DND.Services;
 import com.dnd.DND.Exceptions.EmailExistsException;
 import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.DTO.UserDto;
-import com.dnd.DND.Models.User;
+import com.dnd.DND.Models.Elements.User;
 import com.dnd.DND.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

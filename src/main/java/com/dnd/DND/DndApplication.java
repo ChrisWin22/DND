@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
-import com.dnd.DND.Models.BoardElement;
-import com.dnd.DND.Models.Character;
+import com.dnd.DND.Models.Elements.BoardElement;
+import com.dnd.DND.Models.Elements.Character;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
