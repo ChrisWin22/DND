@@ -32,7 +32,7 @@ public class DnDSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                // .loginPage("/login")
                 .defaultSuccessUrl("/dashboard")
                 .and()
                 .logout()

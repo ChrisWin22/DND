@@ -14,9 +14,83 @@
         <div>
             <form th:action="@{/user/createCharacter}" th:object="${characterformdto}" method="POST">
                 <input type="text" th:field="*{name}" placeholder="Name"/> <br /><br />
+
+                <label for="race">Race:</label>
+                <select th:field="*{race}" name="race" id="race">
+                    <option value=null>--Select An Option--</option>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Halfling">Halfling</option>
+                    <option value="Human">Human</option>
+                    <option value="Dragonborn">Dragonborn</option>
+                    <option value="Gnome">Gnome</option>
+                    <option value="Half-Elf">Half-Elf</option>
+                    <option value="Half-Orc">Half-Orc</option>
+                    <option value="Tiefling">Tiefling</option>
+                </select> <br /><br />
+                <label for="subrace">Sub-Race:</label>
+                <select th:field="*{subrace}" name="subrace" id="subrace" disabled></select><br /><br />
+                <textarea th:field="*{background}" placeholder="Background"></textarea> <br /><br />
+                <input th:field="*{age}" type="number" placeholder="Age"/> <br /><br />
+                <label for="class">Class:</label>
+                <select th:field="*{class}" name="class" id="class">
+                    <option value=null>--Select An Option--</option>
+                    <option value="Barbarian">Barbarian</option>
+                    <option value="Bard">Bard</option>
+                    <option value="Cleric">Cleric</option>
+                    <option value="Druid">Druid</option>
+                    <option value="Fighter">Fighter</option>
+                    <option value="Monk">Monk</option>
+                    <option value="Paladin">Paladin</option>
+                    <option value="Ranger">Ranger</option>
+                    <option value="Rogue">Rogue</option>
+                    <option value="Sorcerer">Sorcerer</option>
+                    <option value="Warlock">Warlock</option>
+                    <option value="Wizard">Wizard</option>
+                </select><br /><br />
+                <label for="sex">Sex:</label>
+                <select th:field="*{sex}" name="sex" id="sex">
+                    <option value=null>--Select An Option--</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select><br /><br />
+                <input th:field="*{weight}" type="number" placeholder="Weight"/><br /><br />
+                <input th:field="*{height}" type="number" placeholder="Height (5.9 = 5'9&quot;)"/><br /><br />
+                <label for="alignment">Alignment:</label>
+                <select th:field="*{alignment}" name="alignment" id="alignment">
+                    <option value=null>--Select An Option--</option>
+                    <option value="Lawful Good">Lawful Good</option>
+                    <option value="Neutral Good">Neutral Good</option>
+                    <option value="Chaotic Good">Chaotic Good</option>
+                    <option value="Lawful Neutral">Lawful Neutral</option>
+                    <option value="Neutral">Neutral</option>
+                    <option value="Chaotic Neutral">Chaotic Neutral</option>
+                    <option value="Lawful Evil">Lawful Evil</option>
+                    <option value="Neutral Evil">Neutral Evil</option>
+                    <option value="Chaotic Evil">Chaotic Evil</option>
+                </select><br /><br />
+                <h3>Ability Scores</h3>
+                <h4>Select Each Option Only Once (Note: This is pre-race and class modifiers)</h4>
+                <button id="generateAbilityScores" type="button">Generate</button>
+                <label for="str">Strength</label>
+                <select th:field="*{str}" name="str" id="str" disabled></select>
+                <label for="dex">Dexterity</label>
+                <select th:field="*{dex}" name="dex" id="dex" disabled></select>
+                <label for="consti">Constitution</label>
+                <select th:field="*{consti}" name="consti" id="consti" disabled></select>
+                <label for="intell">Intelligence</label>
+                <select th:field="*{intell}" name="intell" id="intell" disabled></select>
+                <label for="wis">Wisdom</label>
+                <select th:field="*{wis}" name="wis" id="wis" disabled></select>
+                <label for="charisma">Charisma</label>
+                <select th:field="*{charisma}" name="charisma" id="charisma" disabled></select><br /><br />
+
+
                 <button type="submit" th.text="#{label.form.submit}">Submit</button> <input type="reset" value="Reset" /> <br />
             </form>
         </div>
 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript" th:src="@{/characterCreation/create.js}"></script>
     </body>
 </html>

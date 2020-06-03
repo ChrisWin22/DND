@@ -1,0 +1,36 @@
+.halfScreen{
+    width: 50%;
+}
+
+/* http://jsfiddle.net/Trufa/dmyTR/36/show/ */
+#toggleSidebar {
+	float: left;
+	color: #779DD7;
+	padding: 2px 4px;
+}
+
+/* http://jsfiddle.net/Trufa/dmyTR/36/show/ */
+.icon-chevron-left {
+    background-position: -432px -72px;
+    background-image: url("/images/left_chevron.png");
+}
+
+/* http://jsfiddle.net/Trufa/dmyTR/36/show/ */
+.icon-chevron-right {
+    background-position: -456px -72px;
+    background-image: url("/images/right_chevron.png");
+}
+
+/* http://jsfiddle.net/Trufa/dmyTR/36/show/ */
+[class^="icon-"], [class*=" icon-"] {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	*margin-right: .3em;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-position: 14px 14px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+	margin-top: 1px;
+}

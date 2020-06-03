@@ -18,7 +18,7 @@
                 <tr><a th:href="@{/characterCreation}">+Create A New Character</a></tr>
                 <tr th:each="character:${list}" style="border: 1px solid black;">
                     <td>
-                        <p th:text="${character.name}"></p> 
+                        <p th:text="${character.name + ' (' + character.race + ')'}"></p>
                     </td>
                     <td>
                         <form th:action="@{/playerInGame}" th:object="${characterdto}" method="POST">

@@ -17,21 +17,21 @@
             </div>
         </div>
         <div>
-            <form th:action="@{/createuser}" th:object="${user}" method="POST">
+            <form th:action="@{/createuser}"  th:object="${user}" method="POST">
                 <div>
-                    <input type="text" th:field="*{firstName}" placeholder="First Name"/> <br /><br />
+                    <input type="text" pattern="[a-zA-Z0-9\.-_]{1,}" th:field="*{firstName}" placeholder="First Name"/> <br /><br />
                 </div>
                 <div>
-                    <input type="text" th:field="*{lastName}" placeholder="Last Name"/> <br /> <br />
+                    <input type="text" pattern="[a-zA-Z0-9\.-_]{1,}" th:field="*{lastName}" placeholder="Last Name"/> <br /> <br />
                 </div>
                 <div>
-                    <input type="text" th:field="*{email}" placeholder="Email"/> <br /><br />
+                    <input type="email" th:field="*{email}" placeholder="Email"/> <br /><br />
                 </div>
                 <div>
-                    <input type="text" th:field="*{username}" placeholder="username"/> <br/><br/>
+                    <input type="text" pattern="[a-zA-Z0-9\.-_]{1,}" th:field="*{username}" placeholder="username"/> <br/><br/>
                 </div>
                 <div>
-                    <input type="password" th:field="*{password}" placeholder="Password"/> <br /><br />
+                    <input type="password" pattern="[a-zA-Z0-9!@#$%^&*}{;:/?\.><,|+=]{1,}" th:field="*{password}" placeholder="Password"/> <br /><br />
                 </div>
                 <div>
                     <input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password"/> <br /><br />
