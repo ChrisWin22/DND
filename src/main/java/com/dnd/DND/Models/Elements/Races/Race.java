@@ -9,17 +9,17 @@ import com.dnd.DND.Models.Enums.Vision;
 public class Race {
 
     //Ability Score Modifiers
-    int str;
-    int dex;
-    int wis;
-    int charisma;
-    int consti;
-    int intell;
+    protected int str;
+    protected int dex;
+    protected int wis;
+    protected int charisma;
+    protected int consti;
+    protected int intell;
 
-    int speed;
-    List<String> languages;
-    Vision vision;
-    Size size;
+    protected int speed;
+    protected List<String> languages;
+    protected Vision vision;
+    protected Size size;
 
 
     public Race(){

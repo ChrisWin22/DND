@@ -8,7 +8,16 @@ import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.Elements.Character;
 import com.dnd.DND.Models.Elements.User;
 import com.dnd.DND.Models.Elements.Races.*;
+import com.dnd.DND.Models.Elements.SubRaces.Drow;
+import com.dnd.DND.Models.Elements.SubRaces.Forest_Gnome;
+import com.dnd.DND.Models.Elements.SubRaces.High_Elf;
+import com.dnd.DND.Models.Elements.SubRaces.Hill_Dwarf;
+import com.dnd.DND.Models.Elements.SubRaces.LightFoot;
+import com.dnd.DND.Models.Elements.SubRaces.Mountain_Dwarf;
+import com.dnd.DND.Models.Elements.SubRaces.Rock_Gnome;
+import com.dnd.DND.Models.Elements.SubRaces.Stout;
 import com.dnd.DND.Models.Elements.SubRaces.SubRace;
+import com.dnd.DND.Models.Elements.SubRaces.Wood_Elf;
 import com.dnd.DND.Models.Enums.RaceEnum;
 import com.dnd.DND.Models.Enums.SubRaceEnum;
 import com.dnd.DND.Models.DTO.CharacterDto;
@@ -121,15 +130,15 @@ public class UserController {
     private SubRace getSubRaceFromEnum(SubRaceEnum s){
         if(s != null){
             switch(s){
-                case HILLDWARF:
-                case MOUNTAINDWARF:
-                case HIGHELF:
-                case WOODELF:
-                case DROW:
-                case LIGHTFOOT:
-                case STOUT:
-                case FORESTGNOME:
-                case ROCKGNOME:
+                case HILLDWARF: return new Hill_Dwarf();
+                case MOUNTAINDWARF: return new Mountain_Dwarf();
+                case HIGHELF: return new High_Elf();
+                case WOODELF: return new Wood_Elf();
+                case DROW: return new Drow();
+                case LIGHTFOOT: return new LightFoot();
+                case STOUT: return new Stout();
+                case FORESTGNOME: return new Forest_Gnome();
+                case ROCKGNOME: return new Rock_Gnome();
                 default: return null;
             }
         }else{
