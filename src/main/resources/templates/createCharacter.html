@@ -29,7 +29,9 @@
                     <option value="TIEFLING">Tiefling</option>
                 </select> <br /><br />
                 <label for="subrace">Sub-Race:</label>
-                <select th:field="*{subrace}" name="subrace" id="subrace" disabled></select><br /><br />
+                <select th:field="*{subrace}" name="subrace" id="subrace" disabled>
+                    <option value=null></option>
+                </select><br /><br />
                 <textarea th:field="*{background}" placeholder="Background"></textarea> <br /><br />
                 <input th:field="*{age}" type="number" placeholder="Age"/> <br /><br />
                 <label for="class">Class:</label>

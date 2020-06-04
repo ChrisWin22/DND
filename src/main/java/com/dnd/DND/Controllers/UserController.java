@@ -8,6 +8,9 @@ import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.Elements.Character;
 import com.dnd.DND.Models.Elements.User;
 import com.dnd.DND.Models.Elements.Races.*;
+import com.dnd.DND.Models.Elements.SubRaces.SubRace;
+import com.dnd.DND.Models.Enums.RaceEnum;
+import com.dnd.DND.Models.Enums.SubRaceEnum;
 import com.dnd.DND.Models.DTO.CharacterDto;
 import com.dnd.DND.Models.DTO.CharacterFormDto;
 import com.dnd.DND.Models.DTO.UserDto;
@@ -48,18 +51,9 @@ public class UserController {
     public String createNew(@ModelAttribute("character") CharacterFormDto characterFormDto, Authentication authentication, Model model) {
         Character newChar = new Character();
         newChar.setName(characterFormDto.getName());
-        switch(characterFormDto.getRace()){
-            case DRAGONBORN: newChar.setRace(new Dragonborn()); break;
-            case DWARF: newChar.setRace(new Dwarf()); break;
-            case ELF: newChar.setRace(new Elf()); break;
-            case GNOME: newChar.setRace(new Gnome()); break;
-            case HALFELF: newChar.setRace(new Half_Elf()); break;
-            case HALFORC: newChar.setRace(new Half_Orc()); break;
-            case HALFLING: newChar.setRace(new Halfling()); break;
-            case HUMAN: newChar.setRace(new Human()); break;
-            case TIEFLING: newChar.setRace(new Tiefling()); break;
-            default: newChar.setRace(new Race());
-        }
+        newChar.setRace(getRaceFromEnum(characterFormDto.getRace()));
+        newChar.setSubrace(getSubRaceFromEnum(characterFormDto.getSubrace()));
+        setAttributeScores(newChar, characterFormDto);
         UserDetails userDetails=(UserDetails) authentication.getPrincipal();
         User temp = userRepository.findByUsername(userDetails.getUsername());
         charRepo.save(newChar);
@@ -89,5 +83,57 @@ public class UserController {
             return "redirect:/createuser?error=duplicateusername";
         }
         return "redirect:/dashboard";
+    }
+
+    private void setAttributeScores(Character c, CharacterFormDto cfd){
+        c.setStr(cfd.getStr() + c.getRace().getStr());
+        c.setDex(cfd.getDex() + c.getRace().getDex());
+        c.setCharisma(cfd.getCharisma() + c.getRace().getCharisma());
+        c.setIntell(cfd.getIntell() + c.getRace().getIntell());
+        c.setConsti(cfd.getConsti() + c.getRace().getConsti());
+        c.setWis(cfd.getWis() + c.getRace().getWis());
+
+        if(c.getSubrace() != null){
+            c.setStr(c.getStr() + c.getSubrace().getStr());
+            c.setDex(c.getDex() + c.getSubrace().getDex());
+            c.setCharisma(c.getCharisma() + c.getSubrace().getCharisma());
+            c.setIntell(c.getIntell() + c.getSubrace().getIntell());
+            c.setConsti(c.getConsti() + c.getSubrace().getConsti());
+            c.setWis(c.getWis() + c.getSubrace().getWis());
+        }
+    }
+
+    private Race getRaceFromEnum(RaceEnum r){
+        switch(r){
+            case DRAGONBORN: return new Dragonborn(); 
+            case DWARF: return new Dwarf(); 
+            case ELF:return new Elf(); 
+            case GNOME:return new Gnome(); 
+            case HALFELF:return new Half_Elf(); 
+            case HALFORC: return new Half_Orc(); 
+            case HALFLING:return new Halfling(); 
+            case HUMAN: return new Human(); 
+            case TIEFLING: return new Tiefling(); 
+            default: return new Race();
+        }
+    }
+
+    private SubRace getSubRaceFromEnum(SubRaceEnum s){
+        if(s != null){
+            switch(s){
+                case HILLDWARF:
+                case MOUNTAINDWARF:
+                case HIGHELF:
+                case WOODELF:
+                case DROW:
+                case LIGHTFOOT:
+                case STOUT:
+                case FORESTGNOME:
+                case ROCKGNOME:
+                default: return null;
+            }
+        }else{
+            return null;
+        }
     }
 }

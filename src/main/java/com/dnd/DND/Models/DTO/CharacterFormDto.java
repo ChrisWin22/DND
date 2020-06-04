@@ -9,7 +9,7 @@ public class CharacterFormDto {
     private RaceEnum race;
     private String sex;
     private String background;
-    private SubRace subrace;
+    private SubRaceEnum subrace;
     private String alignment;
     private Integer age;
     private Integer weight;
@@ -54,6 +54,7 @@ public class CharacterFormDto {
     private int AC;
 
     public CharacterFormDto(){
+        subrace = null;
     }
     
     public Class getCharacterClass() {
@@ -96,11 +97,11 @@ public class CharacterFormDto {
         this.background = background;
     }
 
-    public SubRace getSubrace() {
+    public SubRaceEnum getSubrace() {
         return this.subrace;
     }
 
-    public void setSubrace(SubRace subrace) {
+    public void setSubrace(SubRaceEnum subrace) {
         this.subrace = subrace;
     }
 
