@@ -1,5 +1,9 @@
 package com.dnd.DND.Models.Elements;
 
+import com.dnd.DND.Models.Enums.Class;
+import com.dnd.DND.Models.Elements.Races.*;
+import com.dnd.DND.Models.Enums.SubRace;
+
 import org.springframework.data.annotation.Id;
 
 public class Character extends BoardElement{
@@ -7,9 +11,10 @@ public class Character extends BoardElement{
     public String id;
 
     private String name;
-    private String race;
+    private Race race;
+    private Class characterClass;
     private String background;
-    private String subrace;
+    private SubRace subrace;
     private String alignment;
     private double xp;
     private int age;
@@ -57,8 +62,15 @@ public class Character extends BoardElement{
     public Character(){
         
     }
-
     
+    public Class getCharacterClass() {
+        return this.characterClass;
+    }
+
+    public void setCharacterClass(Class characterClass) {
+        this.characterClass = characterClass;
+    }
+
 	public String getId() {
 		return this.id;
 	}
@@ -75,11 +87,11 @@ public class Character extends BoardElement{
         this.name = name;
     }
 
-    public String getRace() {
+    public Race getRace() {
         return this.race;
     }
 
-    public void setRace(String race) {
+    public void setRace(Race race) {
         this.race = race;
     }
 
@@ -91,11 +103,11 @@ public class Character extends BoardElement{
         this.background = background;
     }
 
-    public String getSubrace() {
+    public SubRace getSubrace() {
         return this.subrace;
     }
 
-    public void setSubrace(String subrace) {
+    public void setSubrace(SubRace subrace) {
         this.subrace = subrace;
     }
 

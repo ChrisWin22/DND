@@ -1,11 +1,15 @@
 package com.dnd.DND.Models.DTO;
 
-public class CharacterFormDto{
+import com.dnd.DND.Models.Enums.*;
+import com.dnd.DND.Models.Enums.Class;
+
+public class CharacterFormDto {
     private String name;
-    private String race;
+    private Class characterClass;
+    private RaceEnum race;
     private String sex;
     private String background;
-    private String subrace;
+    private SubRace subrace;
     private String alignment;
     private Integer age;
     private Integer weight;
@@ -51,6 +55,14 @@ public class CharacterFormDto{
 
     public CharacterFormDto(){
     }
+    
+    public Class getCharacterClass() {
+        return this.characterClass;
+    }
+
+    public void setCharacterClass(Class characterClass) {
+        this.characterClass = characterClass;
+    }
 
     public String getSex() {
         return this.sex;
@@ -68,11 +80,11 @@ public class CharacterFormDto{
         this.name = name;
     }
 
-    public String getRace() {
+    public RaceEnum getRace() {
         return this.race;
     }
 
-    public void setRace(String race) {
+    public void setRace(RaceEnum race) {
         this.race = race;
     }
 
@@ -84,11 +96,11 @@ public class CharacterFormDto{
         this.background = background;
     }
 
-    public String getSubrace() {
+    public SubRace getSubrace() {
         return this.subrace;
     }
 
-    public void setSubrace(String subrace) {
+    public void setSubrace(SubRace subrace) {
         this.subrace = subrace;
     }
 

@@ -1,6 +1,6 @@
 package com.dnd.DND.Models.Enums;
 
-public enum Race {
+public enum RaceEnum {
     DWARF,
     ELF,
     HALFLING,

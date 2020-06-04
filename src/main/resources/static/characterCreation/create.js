@@ -13,39 +13,43 @@ function updateSubRace(){
             $("#subrace").empty();
             sub.setAttribute("disabled", "disabled");
             break;
-        case "Dwarf":
+        case "DWARF":
             if(sub.hasAttribute("disabled")){
                 sub.removeAttribute("disabled");
             }
             var subs = ["Hill Dwarf", "Mountain Dwarf"];
-            addItemsToSelect("subrace", subs);
+            var subValues = ["HILLDWARF", "MOUNTAINDWARF"];
+            addItemsToSelect("subrace", subs, subValues);
             break;
-        case "Elf":
+        case "ELF":
             if(sub.hasAttribute("disabled")){
                 sub.removeAttribute("disabled");
             }
             var subs = ["High Elf", "Wood Elf", "Dark Elf/Drow"];
-            addItemsToSelect("subrace", subs);
+            var subValues = ["HIGHELF", "WOODELF", "DROW"];
+            addItemsToSelect("subrace", subs, subValues);
             break;
-        case "Halfling":
+        case "HALFLING":
             if(sub.hasAttribute("disabled")){
                 sub.removeAttribute("disabled");
             }
             var subs = ["Lightfoot", "Stout"];
-            addItemsToSelect("subrace", subs);
+            var subValues = ["LIGHTFOOT", "STOUT"];
+            addItemsToSelect("subrace", subs, subValues);
             break;
-        case "Gnome":
+        case "GNOME":
             if(sub.hasAttribute("disabled")){
                 sub.removeAttribute("disabled");
             }
             var subs = ["Forest Gnome", "Rock Gnome"];
-            addItemsToSelect("subrace", subs);
+            var subValues = ["FORESTGNOME", "ROCKGNOME"];
+            addItemsToSelect("subrace", subs, subValues);
             break;
-        case "Tiefling":
-        case "Half-Orc":
-        case "Half-Elf":
-        case "Dragonborn":
-        case "Human":
+        case "TIEFLING":
+        case "HALFORC":
+        case "HALFELF":
+        case "DRAGONBORN":
+        case "HUMAN":
         default:
             $("#subrace").empty();
             if(!sub.hasAttribute("disabled")){
@@ -54,13 +58,13 @@ function updateSubRace(){
     }
 }
 
-function addItemsToSelect(id, arr){
+function addItemsToSelect(id, arr, valueArr){
 
     $("#" + id).empty();
     var select = document.getElementById(id);
     select.options[0] = new Option("--Select An Option--", null);
     for(i in arr){
-        select.options[select.options.length] = new Option(arr[i], arr[i]);
+        select.options[select.options.length] = new Option(arr[i], valueArr[i]);
     }
 }
 
@@ -80,12 +84,12 @@ function generateScores(){
     document.getElementById("wis").removeAttribute("disabled");
     document.getElementById("charisma").removeAttribute("disabled");
 
-    addItemsToSelect("str", arr);
-    addItemsToSelect("dex", arr);
-    addItemsToSelect("consti", arr);
-    addItemsToSelect("intell", arr);
-    addItemsToSelect("wis", arr);
-    addItemsToSelect("charisma", arr);
+    addItemsToSelect("str", arr, arr);
+    addItemsToSelect("dex", arr, arr);
+    addItemsToSelect("consti", arr, arr);
+    addItemsToSelect("intell", arr, arr);
+    addItemsToSelect("wis", arr, arr);
+    addItemsToSelect("charisma", arr, arr);
 
 
 }

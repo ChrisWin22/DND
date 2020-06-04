@@ -7,6 +7,7 @@ import com.dnd.DND.Exceptions.EmailExistsException;
 import com.dnd.DND.Exceptions.UsernameExistsException;
 import com.dnd.DND.Models.Elements.Character;
 import com.dnd.DND.Models.Elements.User;
+import com.dnd.DND.Models.Elements.Races.*;
 import com.dnd.DND.Models.DTO.CharacterDto;
 import com.dnd.DND.Models.DTO.CharacterFormDto;
 import com.dnd.DND.Models.DTO.UserDto;
@@ -47,7 +48,18 @@ public class UserController {
     public String createNew(@ModelAttribute("character") CharacterFormDto characterFormDto, Authentication authentication, Model model) {
         Character newChar = new Character();
         newChar.setName(characterFormDto.getName());
-        newChar.setRace(characterFormDto.getRace());
+        switch(characterFormDto.getRace()){
+            case DRAGONBORN: newChar.setRace(new Dragonborn()); break;
+            case DWARF: newChar.setRace(new Dwarf()); break;
+            case ELF: newChar.setRace(new Elf()); break;
+            case GNOME: newChar.setRace(new Gnome()); break;
+            case HALFELF: newChar.setRace(new Half_Elf()); break;
+            case HALFORC: newChar.setRace(new Half_Orc()); break;
+            case HALFLING: newChar.setRace(new Halfling()); break;
+            case HUMAN: newChar.setRace(new Human()); break;
+            case TIEFLING: newChar.setRace(new Tiefling()); break;
+            default: newChar.setRace(new Race());
+        }
         UserDetails userDetails=(UserDetails) authentication.getPrincipal();
         User temp = userRepository.findByUsername(userDetails.getUsername());
         charRepo.save(newChar);
