@@ -1,8 +1,5 @@
 package com.dnd.DND.Controllers;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.dnd.DND.Models.Elements.User;
 import com.dnd.DND.DndApplication;
 import com.dnd.DND.Models.Elements.Character;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
-import java.security.Principal;
 
 @EnableAutoConfiguration
 @Controller
